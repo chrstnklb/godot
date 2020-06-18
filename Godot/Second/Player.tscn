@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://art/PNG/Players/Player Blue/playerBlue_stand.png" type="Texture" id=2]
+[ext_resource path="res://art/PNG/Players/Player Blue/playerBlue_walk3.png" type="Texture" id=3]
+[ext_resource path="res://art/PNG/Players/Player Blue/playerBlue_walk2.png" type="Texture" id=4]
+[ext_resource path="res://art/PNG/Players/Player Blue/playerBlue_swim1.png" type="Texture" id=5]
+[ext_resource path="res://art/PNG/Players/Player Blue/playerBlue_swim2.png" type="Texture" id=6]
+[ext_resource path="res://sounds/jumpuiuiui.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/runbreath.wav" type="AudioStream" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "walk-right",
+"speed": 10.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 544, 769.185 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+jump_force = -700
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( -1, 1 )
+scale = Vector2( 1.42222, 1.18519 )
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Run" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -1.52588e-05 )
+scale = Vector2( 1.42222, 1.18519 )
+frames = SubResource( 2 )
+animation = "walk-right"
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 7 )
+
+[node name="Run" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 8 )
+volume_db = -16.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
